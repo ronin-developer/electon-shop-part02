@@ -42,8 +42,9 @@ function NavbarComponent() {
       <nav className="bg-primaryBlue h-full lg:h-[100px] py-5s">
         <div className="container mx-auto flex-col lg:flex-row flex items-center h-full justify-between">
           {/* logo */}
-          <img src={logo} alt="logo" />
-
+          <Link to="/">
+            <img src={logo} alt="logo" />
+          </Link>
           {/* search bar */}
           <div className="bg-textWhite rounded-[20px]">
             <input

@@ -15,6 +15,8 @@ export default {
       'textBlue': '#1B5A7D',
       'starGrey': '#ACACAC',
       'skyBlue': '#E2F4FF',
+      'lightGreen' : '#30BD57',
+      'mainRed' : '#C33131',
     },
     extend: {},
   },
