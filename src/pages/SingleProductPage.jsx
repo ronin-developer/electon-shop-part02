@@ -1,17 +1,26 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import ProductService from "../services/productService";
+import { useDispatch } from "react-redux";
+// rating
 import { Rating } from "@mui/material";
 // loader
 import LoaderComponent from "../components/LoaderComponent";
 // icon
 import { FcCheckmark } from "react-icons/fc";
 import { RxCross2 } from "react-icons/rx";
+import { CiHeart, CiShoppingCart } from "react-icons/ci";
+import { saveInCartAction } from "../store/cartSlice";
+
 
 function SingleProductPage() {
   const [singleProduct, setSingleProduct] = useState({});
   const [currentImage, setCurrentImage] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+
+  // dispatch
+const dispatch = useDispatch();
+
 
   // 1. id
   const { productId } = useParams();
@@ -28,6 +37,11 @@ function SingleProductPage() {
 
   function handleCurrentImage(index) {
     setCurrentImage(index);
+  }
+
+  // function handleAddToCart
+  function handleAddToCart(){
+    dispatch(saveInCartAction(singleProduct));
   }
 
   return (
@@ -98,10 +112,26 @@ function SingleProductPage() {
               Total price:{" "}
               <span className="text-textLightBlue">${singleProduct.price}</span>
             </p>
+
+            {/* Add/Favorite button*/}
+            <div className="flex items center mt-[50px] gap-5">
+              <Link to={'/cart'}
+              className="bg-secondaryYelow text-textWhite px-[24px] py-[12px]  rounded-xl shadow-lg text-[20px]"
+              onClick={handleAddToCart}
+              >Add to cart</Link>
+              <Link 
+              to={'/favorite'}
+              className="bg-skyBlue text-textWhite px-[24px] py-[12px] rounded-xl shadow-lg border border-textBlack"
+              >
+                <CiHeart size={24} />
+              </Link>
+            </div>
           </div>
         </div>
       ) : (
+        <div className="flex">
         <LoaderComponent />
+        </div>
       )}
     </div>
   );

@@ -4,7 +4,7 @@ function LoaderComponent() {
   return (
     <div
       style={{
-        margin: "auto",
+        margin: "3rem auto",
         display: "inline-block",
         width: "64px",
         height: "64px",

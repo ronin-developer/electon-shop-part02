@@ -14,27 +14,10 @@ import {
   UserButton,
 } from "@clerk/clerk-react";
 import CategoryComponent from "./CategoryComponent";
+import { useSelector } from "react-redux";
 
 function NavbarComponent() {
-  const navItems = [
-    {
-      icon: <CiUser />,
-      title: "SignIn",
-      path: "/",
-    },
-    {
-      icon: <CiHeart />,
-      title: "Favorite",
-      path: "/",
-      count: 0,
-    },
-    {
-      icon: <CiShoppingCart />,
-      title: "Cart",
-      path: "/",
-      count: 0,
-    },
-  ];
+  const {totalProduct} = useSelector((state) => state.cartStore);
 
   return (
     <div className="">
@@ -92,7 +75,7 @@ function NavbarComponent() {
               <li className="flex-center gap-[10px]">
                 <div className="flex-center">
                   <CiShoppingCart color="white" size={25} />
-                  <span className="badge">0</span>
+                  <span className="badge">{totalProduct}</span>
                 </div>
                 <Link to={"/cart"} className="text-textWhite">
                   Cart
