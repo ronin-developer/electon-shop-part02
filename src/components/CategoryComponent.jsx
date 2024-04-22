@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import ProductService from "../services/productService";
+import { useDispatch } from "react-redux";
+import { setNewCategory } from "../store/productSlice";
 
 function CategoryComponent() {
   const [category, setCategory] = useState([]);
   const [isActive, setIsActive] = useState(false);
+
+  const dispatch = useDispatch();
 
   // 2. useEffect
   useEffect(() => {
@@ -27,9 +31,22 @@ function CategoryComponent() {
         <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 grid-cols-3 gap-[10px] place-items-center">
           {isActive ? (
             <>
+              <li
+                onClick={() => {
+                  dispatch(setNewCategory("allProducts"));
+                  setIsActive(false);
+                }}
+                className="bg-primaryBlue text-textWhite px-4 py-2 w-[250px] text-center rounded-md cursor-pointer hover:bg-secondaryYelow transition-all"
+              >
+                All products
+              </li>
               {category.map((cat, index) => {
                 return (
                   <li
+                    onClick={() => {
+                      dispatch(setNewCategory(cat));
+                      setIsActive(false);
+                    }}
                     className="bg-primaryBlue text-textWhite px-4 py-2 w-[250px] text-center rounded-md cursor-pointer hover:bg-secondaryYelow transition-all"
                     key={index}
                   >

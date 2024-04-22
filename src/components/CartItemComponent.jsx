@@ -1,11 +1,11 @@
 import React from "react";
 // delete item in cart
-import { deleteItemCartAction } from "../store/cartSlice";
+import { deleteItemCartAction, setPriceHandler } from "../store/cartSlice";
 // icons
 import { RxCross2 } from "react-icons/rx";
 import { useDispatch } from "react-redux";
 
-function CartItemComponent({ item }) {
+function CartItemComponent({ item, index }) {
   const dispatch = useDispatch();
 
   function removeItemHandler() {
@@ -33,13 +33,17 @@ function CartItemComponent({ item }) {
         <p>${item.price}</p>
       </div>
       <div className="flex items-center">
-        <button className="px-[8px] py[4px] bg-tertiaryGrey text-[18px]">
+        <button 
+        onClick={() => dispatch(setPriceHandler({increment: 1, index}))}
+        className="px-[8px] py[4px] bg-tertiaryGrey text-[18px]">
           +
         </button>
         <span className="px-[8px] py[4px] bg-tertiaryGrey text-[18px]">
           {item.count}
         </span>
-        <button className="px-[8px] py[4px] bg-tertiaryGrey text-[18px]">
+        <button 
+        onClick={() => dispatch(setPriceHandler({increment: -1, index}))}
+        className="px-[8px] py[4px] bg-tertiaryGrey text-[18px]">
           -
         </button>
       </div>
